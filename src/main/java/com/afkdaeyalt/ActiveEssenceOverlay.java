@@ -33,7 +33,7 @@ public class ActiveEssenceOverlay extends Overlay
 	{
 		GameObject activeDaeyaltEssence = plugin.getActiveDaeyaltEssence();
 
-		if (!config.highlightActiveEssence())
+		if (!config.highlightActiveEssence() || !plugin.isPlayerInMines() || activeDaeyaltEssence == null)
 		{
 			return null;
 		}

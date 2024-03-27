@@ -1,6 +1,5 @@
 package com.afkdaeyalt;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.Getter;
@@ -20,12 +19,10 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 @Slf4j
-@PluginDescriptor(
-	name = "AFK Daeyalt"
-)
+@PluginDescriptor(name = "AFK Daeyalt")
 public class AfkDaeyaltPlugin extends Plugin
 {
-	private static final ImmutableSet<Integer> DAEYALT_MINES_REGION = ImmutableSet.of(3624, 9712);
+	private static final int DAEYALT_MINES_REGION = 14744;
 	@Inject
 	ActiveEssenceOverlay overlay;
 
@@ -74,11 +71,6 @@ public class AfkDaeyaltPlugin extends Plugin
 	@Subscribe
 	public void onGameObjectSpawned(GameObjectSpawned event)
 	{
-		if (!isPlayerInMines)
-		{
-			return;
-		}
-
 		log.info("Object spawned");
 		GameObject object = event.getGameObject();
 		if (object.getId() == ObjectID.DAEYALT_ESSENCE_39095)
@@ -90,11 +82,6 @@ public class AfkDaeyaltPlugin extends Plugin
 	@Subscribe
 	public void onGameObjectDespawned(GameObjectDespawned event)
 	{
-		if (!isPlayerInMines)
-		{
-			return;
-		}
-
 		log.info("Object despawned");
 		GameObject object = event.getGameObject();
 		if (object == activeDaeyaltEssence)
@@ -111,7 +98,6 @@ public class AfkDaeyaltPlugin extends Plugin
 
 	private boolean checkIfPlayerInMines()
 	{
-		return client.getLocalPlayer() != null
-			&& DAEYALT_MINES_REGION.contains(client.getLocalPlayer().getWorldLocation().getRegionID());
+		return client.getLocalPlayer() != null && DAEYALT_MINES_REGION == client.getLocalPlayer().getWorldLocation().getRegionID();
 	}
 }
