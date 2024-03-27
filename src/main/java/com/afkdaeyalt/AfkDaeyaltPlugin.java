@@ -71,7 +71,6 @@ public class AfkDaeyaltPlugin extends Plugin
 	@Subscribe
 	public void onGameObjectSpawned(GameObjectSpawned event)
 	{
-		log.info("Object spawned");
 		GameObject object = event.getGameObject();
 		if (object.getId() == ObjectID.DAEYALT_ESSENCE_39095)
 		{
@@ -82,7 +81,6 @@ public class AfkDaeyaltPlugin extends Plugin
 	@Subscribe
 	public void onGameObjectDespawned(GameObjectDespawned event)
 	{
-		log.info("Object despawned");
 		GameObject object = event.getGameObject();
 		if (object == activeDaeyaltEssence)
 		{

@@ -19,7 +19,6 @@ public class IdlePulseOverlay extends Overlay
 	{
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
-
 		this.client = client;
 		this.plugin = plugin;
 		this.config = config;
@@ -28,7 +27,8 @@ public class IdlePulseOverlay extends Overlay
 	@Override
 	public Dimension render(Graphics2D graphics2D)
 	{
-		if (!plugin.isPlayerInMines()){
+		if (!plugin.isPlayerInMines())
+		{
 			return null;
 		}
 
