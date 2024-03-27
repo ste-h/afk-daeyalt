@@ -1,5 +1,6 @@
 package com.afkdaeyalt;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import javax.inject.Inject;
@@ -25,13 +26,28 @@ public class IdlePulseOverlay extends Overlay
 	}
 
 	@Override
-	public Dimension render(Graphics2D graphics2D)
+	public Dimension render(Graphics2D graphics)
 	{
 		if (!plugin.isPlayerInMines())
 		{
 			return null;
 		}
 
+		if (plugin.isPlayerIdle())
+		{
+			tintWithColor(graphics, Color.ORANGE);
+		}
+
 		return null;
+	}
+
+	// TODO: Allow this to be customizeable
+	private void tintWithColor(Graphics2D graphics, Color color)
+	{
+		long currentTime = System.currentTimeMillis();
+		double opacity = 0.4 + 0.2 * Math.sin(currentTime / 1000.0);
+		Color transparentColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int) (opacity * 255));
+		graphics.setColor(transparentColor);
+		graphics.fillRect(0, 0, client.getCanvasWidth(), client.getCanvasHeight());
 	}
 }
